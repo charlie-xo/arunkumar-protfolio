@@ -15,7 +15,7 @@ import { Github, Linkedin, Mail, Phone, Award, Briefcase, Music, Star } from 'lu
 // --- Data from your Resume ---
 const portfolioData = {
   name: "ARUNKUMAR R",
-  profilePicture: "/arun-profile.jpg", 
+  profilePicture: "/arun-profile.jpg",
   summary: "A self-driven and detail-oriented recent M.Sc. Information Technology graduate with practical skills in developing dynamic web applications using React.js and other modern front-end technologies. Proficient in problem-solving and user-centric design. Eager to apply academic knowledge and project-based skills to a challenging entry-level role in a growth-driven organization.",
   contact: {
     email: "arunkumarr09032003@gmail.com",
@@ -31,12 +31,12 @@ const portfolioData = {
     {
       title: "Uzhavar Sandhai - E-commerce App",
       description: "Developed a full-stack web application using Next.js and Supabase to create a digital marketplace for farmers. Implemented features for product listing, user authentication, and a shopping cart.",
-      liveLink: "#",
+      liveLink: "https://uzhavar-sandhai-cbe.vercel.app/products/add", // <- ഇങ്കെ താൻ മാറ്റം
     },
     {
       title: "Notes Web Application",
       description: "Designed and developed a secure notes web application using Next.js and Supabase. Implemented user authentication to allow users to create, manage, and save their personal notes privately.",
-      liveLink: "#",
+      liveLink: "https://notes-project-nine.vercel.app/login", // <- ഇങ്കെ താൻ മാറ്റം
     },
     {
       title: "Ecommerce Website",
@@ -62,8 +62,8 @@ const portfolioData = {
     },
   ],
   favoriteSong: {
-    title: "Billie Jean", 
-    mp3Url: "/arun-song.mp3", 
+    title: "Billie Jean",
+    mp3Url: "/arun-song.mp3",
   }
 };
 
@@ -196,10 +196,10 @@ export default function PortfolioPage() {
 
         <Section id="song" title={portfolioData.favoriteSong.title} icon={<Music className="text-teal-400" size={32} />}>
           <div className="bg-gray-800 p-4 md:p-8 rounded-lg shadow-lg">
-             <audio controls className="w-full">
-              <source src={portfolioData.favoriteSong.mp3Url} type="audio/mpeg" />
-              Your browser does not support the audio element.
-            </audio>
+           <audio controls className="w-full">
+             <source src={portfolioData.favoriteSong.mp3Url} type="audio/mpeg" />
+             Your browser does not support the audio element.
+           </audio>
           </div>
         </Section>
       </main>
