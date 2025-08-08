@@ -1,29 +1,27 @@
-"use client"; // Intha line-ah add panniyachu. Ithu thaan error-ah sari seiyum.
+"use client";
 
 // Welcome to your new portfolio!
 // This is a complete, single-file component for your Next.js portfolio.
-// You can copy-paste this code into your `app/page.js` file.
+// You can copy-paste this code into your `app/page.tsx` file.
 // Make sure you have Next.js and Tailwind CSS setup.
 // To use icons, run: npm install lucide-react
 
-import React, { useState } from 'react'; // useState-ah import panniyachu
+import React, { useState, ReactNode } from 'react'; // ReactNode-ah import panniyachu
+// import Image from 'next/image'; // Intha line-ah neekiyachu. Build error-ah sari seiya.
 
 // You can install lucide-react for icons: npm install lucide-react
-// Or you can use any other icon library.
 import { Github, Linkedin, Mail, Phone, Award, Briefcase, Music, Star } from 'lucide-react';
 
 // --- Data from your Resume ---
-// Unga details ah inga maathikalam
 const portfolioData = {
   name: "ARUNKUMAR R",
-  // STEP 1: Unga photo va `arun-profile.jpg` nu name panni `public` folder la podunga.
   profilePicture: "/arun-profile.jpg", 
   summary: "A self-driven and detail-oriented recent M.Sc. Information Technology graduate with practical skills in developing dynamic web applications using React.js and other modern front-end technologies. Proficient in problem-solving and user-centric design. Eager to apply academic knowledge and project-based skills to a challenging entry-level role in a growth-driven organization.",
   contact: {
     email: "arunkumarr09032003@gmail.com",
-    phone: "+91 90256 04721", // Ippo number readable ah irukkum
-    linkedin: "https://www.linkedin.com/in/your-profile", // Unga LinkedIn profile link ah inga podunga
-    github: "https://github.com/charlie-xo?tab=packages", // GitHub link-ah maathiyachu
+    phone: "+91 90256 04721",
+    linkedin: "https://www.linkedin.com/in/your-profile",
+    github: "https://github.com/charlie-xo?tab=packages",
   },
   skills: {
     technical: ["HTML", "CSS", "JavaScript (ES6)", "React", "Next.js", "Supabase", "Figma", "Python", "MySQL"],
@@ -33,12 +31,12 @@ const portfolioData = {
     {
       title: "Uzhavar Sandhai - E-commerce App",
       description: "Developed a full-stack web application using Next.js and Supabase to create a digital marketplace for farmers. Implemented features for product listing, user authentication, and a shopping cart.",
-      liveLink: "#", // Intha project ku link iruku
+      liveLink: "#",
     },
     {
       title: "Notes Web Application",
       description: "Designed and developed a secure notes web application using Next.js and Supabase. Implemented user authentication to allow users to create, manage, and save their personal notes privately.",
-      liveLink: "#", // Intha project kum link iruku
+      liveLink: "#",
     },
     {
       title: "Ecommerce Website",
@@ -65,13 +63,25 @@ const portfolioData = {
   ],
   favoriteSong: {
     title: "Billie Jean", 
-    // STEP 2: Unga paatai `arun-song.mp3` nu name panni `public` folder la podunga.
     mp3Url: "/arun-song.mp3", 
   }
 };
 
+// --- TypeScript Interfaces for Props ---
+// Intha types add pannathunala antha error varathu
+interface SectionProps {
+  id: string;
+  title: string;
+  icon: ReactNode;
+  children: ReactNode;
+}
+
+interface SkillBadgeProps {
+  skill: string;
+}
+
 // --- Reusable Components ---
-const Section = ({ id, title, icon, children }) => (
+const Section = ({ id, title, icon, children }: SectionProps) => (
   <section id={id} className="py-12 md:py-20 px-4">
     <div className="max-w-4xl mx-auto">
       <div className="flex items-center mb-8">
@@ -83,39 +93,38 @@ const Section = ({ id, title, icon, children }) => (
   </section>
 );
 
-const SkillBadge = ({ skill }) => (
+const SkillBadge = ({ skill }: SkillBadgeProps) => (
   <span className="bg-gray-700 text-teal-300 text-sm font-medium mr-2 mb-2 px-3 py-1.5 rounded-full">{skill}</span>
 );
 
 // --- Main Page Component ---
 export default function PortfolioPage() {
-  // State to show/hide contact details
   const [showEmail, setShowEmail] = useState(false);
   const [showPhone, setShowPhone] = useState(false);
 
   const handleEmailClick = () => {
     setShowEmail(!showEmail);
-    setShowPhone(false); // Phone number ah hide pannidum
+    setShowPhone(false);
   };
 
   const handlePhoneClick = () => {
     setShowPhone(!showPhone);
-    setShowEmail(false); // Email ah hide pannidum
+    setShowEmail(false);
   };
 
   return (
     <div className="bg-gray-900 min-h-screen font-sans">
       
-      {/* --- Hero Section --- */}
       <header className="bg-gray-800 text-white text-center py-20 px-4">
         <div className="max-w-4xl mx-auto">
+          {/* Image component-ah maathi <img> tag use panniyachu */}
           <img
             src={portfolioData.profilePicture}
             alt={portfolioData.name}
-            width="160"
-            height="160"
+            width={160}
+            height={160}
             className="rounded-full mx-auto ring-4 ring-teal-500 shadow-lg"
-            onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/160x160/1a202c/4fd1c5?text=AR'; }}
+            onError={(e) => { (e.currentTarget as HTMLImageElement).src='https://placehold.co/160x160/1a202c/4fd1c5?text=AR'; }}
           />
           <h1 className="text-4xl md:text-5xl font-bold mt-6">{portfolioData.name}</h1>
           <p className="text-lg md:text-xl text-gray-300 mt-4 max-w-2xl mx-auto">{portfolioData.summary}</p>
@@ -127,7 +136,6 @@ export default function PortfolioPage() {
             <a href={portfolioData.contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-teal-400 transition-colors">
               <Linkedin size={28} />
             </a>
-            {/* Mail and Phone icons ippo button ah maariyachu */}
             <button onClick={handleEmailClick} className="text-gray-300 hover:text-teal-400 transition-colors">
               <Mail size={28} />
             </button>
@@ -136,7 +144,6 @@ export default function PortfolioPage() {
             </button>
           </div>
 
-          {/* Contact details kaaturathukku pudhu section */}
           <div className="mt-6 text-lg text-teal-300 transition-all duration-300 h-8">
             {showEmail && <p>{portfolioData.contact.email}</p>}
             {showPhone && <p>{portfolioData.contact.phone}</p>}
@@ -146,7 +153,6 @@ export default function PortfolioPage() {
       </header>
 
       <main>
-        {/* --- Skills Section --- */}
         <Section id="skills" title="Skills" icon={<Star className="text-teal-400" size={32} />}>
           <div className="bg-gray-800 p-8 rounded-lg shadow-lg">
             <h3 className="text-2xl font-semibold text-white mb-4">Technical Skills</h3>
@@ -160,7 +166,6 @@ export default function PortfolioPage() {
           </div>
         </Section>
 
-        {/* --- Projects Section --- */}
         <Section id="projects" title="Projects" icon={<Briefcase className="text-teal-400" size={32} />}>
           <div className="grid md:grid-cols-2 gap-8">
             {portfolioData.projects.map((project, index) => (
@@ -177,7 +182,6 @@ export default function PortfolioPage() {
           </div>
         </Section>
 
-        {/* --- Education Section --- */}
         <Section id="education" title="Education" icon={<Award className="text-teal-400" size={32} />}>
           <div className="bg-gray-800 p-8 rounded-lg shadow-lg space-y-6">
             {portfolioData.education.map((edu, index) => (
@@ -190,7 +194,6 @@ export default function PortfolioPage() {
           </div>
         </Section>
 
-        {/* --- Favorite Song Section --- */}
         <Section id="song" title={portfolioData.favoriteSong.title} icon={<Music className="text-teal-400" size={32} />}>
           <div className="bg-gray-800 p-4 md:p-8 rounded-lg shadow-lg">
              <audio controls className="w-full">
@@ -201,7 +204,6 @@ export default function PortfolioPage() {
         </Section>
       </main>
 
-      {/* --- Footer --- */}
       <footer className="bg-gray-800 text-center py-8 px-4">
         <p className="text-gray-400">&copy; {new Date().getFullYear()} {portfolioData.name}. All Rights Reserved.</p>
       </footer>
