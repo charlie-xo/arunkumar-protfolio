@@ -24,6 +24,7 @@ const portfolioData = {
     github: "https://github.com/charlie-xo?tab=packages",
   },
   skills: {
+    // 'Prompt Engineering' has been removed from this list.
     technical: ["HTML", "CSS", "JavaScript (ES6)", "React", "Next.js", "Supabase", "Figma", "Python", "MySQL"],
     soft: ["Adaptability", "Problem Solving", "Team Collaboration", "Decision Making"],
   },
